@@ -2,6 +2,7 @@ site_name: '手里有只毛毛虫-笔记'
 site_url: https://mk.krjojo.com/
 repo_url: https://github.com/miniwater/mkdocs
 repo_name: miniwater/mkdocs
+
 theme:
   name: material
   language: zh
@@ -14,7 +15,6 @@ theme:
       toggle:
         icon: material/brightness-auto
         name: 切换到白天模式
-
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -22,7 +22,6 @@ theme:
       toggle:
         icon: material/brightness-7 
         name: 切换到黑暗模式
-
     # Palette toggle for dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
