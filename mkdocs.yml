@@ -1,0 +1,66 @@
+site_name: '手里有只毛毛虫-笔记'
+site_url: https://mk.krjojo.com/
+theme:
+  name: material
+  language: zh
+  font: false
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette: 
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: 切换到白天模式
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      toggle:
+        icon: material/brightness-7 
+        name: 切换到黑暗模式
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      toggle:
+        icon: material/brightness-4
+        name: 切换到自动模式
+  features:
+    - toc.follow    # 锚点跟踪 右侧边栏会自动滚动
+    - navigation.top  # 返回顶部按钮
+    - content.code.copy # 代码复制
+    - navigation.expand # 展开左侧边栏
+    - navigation.tracking # 地址栏中的 URL 会自动更新为目录中突出显示的活动定位点(复制url就能定位了)
+    - navigation.tabs # 顶级部分将呈现在上方视口标题下方的菜单层中
+    - navigation.tabs.sticky # 导航选项卡将锁定在标题下方，并在向下滚动时始终保持可见
+copyright: 手里有只毛毛虫  2024. 版权所有。 <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备20058687号</a>
+extra:
+  homepage: https://krjojo.com
+  generator: false    # 隐藏Made with Material for MkDocs 通知
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/miniwater
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true   # 数学排版 https://www.mathjax.org/
+  - pymdownx.highlight:
+      use_pygments: true # 使用 https://pygments.org/ 的构建时语法高亮
+      linenums: true    # 代码添加行号
+  - pymdownx.superfences:   # 允许代码和内容块相互嵌套
+      custom_fences:    # 启用对 Mermaid.js 图
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list # markdown短代码表情
+  - pymdownx.emoji: # markdown短代码表情
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+extra_javascript: # 数学公式
+  - javascripts/mathjax.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+
