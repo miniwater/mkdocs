@@ -42,7 +42,7 @@ extra:
   generator: false    # 隐藏Made with Material for MkDocs 通知
   social:
     - icon: fontawesome/brands/github 
-      link: https://github.com/miniwater
+      link: https://github.com/
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true   # 数学排版 https://www.mathjax.org/
