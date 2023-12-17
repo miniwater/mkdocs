@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    # 关键字指定此步骤将运行操作。这是一项将存储库签出到运行器的操作，允许您对代码（例如生成和测试工具）运行脚本或其他操作。每当工作流使用存储库的代码时，您都应使用签出操作。
       - uses: actions/checkout@v4
       - name: Configure Git Credentials
         run: |
