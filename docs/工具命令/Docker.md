@@ -320,6 +320,30 @@ docker inspect -f "{{ .State.StartedAt }}" ba-208
 # docker volume inspect edc-nginx-vol // 查看指定容器卷详情信息
 ```
 
+## Dockerfile
+
+```dockerfile
+FROM   basse镜像
+
+MAINTAINER    镜像作者
+
+COPY    复制当前目录文件到镜像
+COPY    src dest
+COPY    ["src","dest"]
+
+ADD   一样，复制并自动解压(tar,zip,tgz,xz)
+
+EXPOSE    监听端口
+
+WORKDIR  设置工作目录
+
+VOLUME    存储
+
+RUN   在容器中运行的命令
+
+CMD 容器启动时的命令
+```
+
 ## docker swarm
 
 Docker公司推出的用来管理docker集群的平台，swarm偏重的是容器的部署,而k8s偏重于应用的部署。
