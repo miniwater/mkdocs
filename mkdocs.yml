@@ -2,10 +2,8 @@ site_name: '手里有只毛毛虫-笔记'
 site_url: https://mk.krjojo.com/
 repo_url: https://github.com/miniwater/mkdocs
 repo_name: miniwater/mkdocs
-# edit_uri: edit/master/docs/   #跳转GitHub编辑
 theme:
   name: material
-  custom_dir: overrides
   language: zh
   font: false
   logo: assets/logo.png
@@ -40,7 +38,6 @@ theme:
     - navigation.tracking # 地址栏中的 URL 会自动更新为目录中突出显示的活动定位点(复制url就能定位了)
     - navigation.tabs # 顶级部分将呈现在上方视口标题下方的菜单层中
     - navigation.tabs.sticky # 导航选项卡将锁定在标题下方，并在向下滚动时始终保持可见
-    # - content.action.edit   #跳转GitHub编辑
 copyright: 手里有只毛毛虫  2024. 版权所有。 <a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备20058687号</a>
 extra:
   homepage: https://krjojo.com
