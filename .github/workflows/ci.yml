@@ -28,3 +28,4 @@ jobs:
       - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
       - run: ls -l
+      - run: ls -l site
