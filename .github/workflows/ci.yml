@@ -29,3 +29,12 @@ jobs:
       - run: mkdocs gh-deploy --force
       - run: ls -l
       - run: ls -l site
+      - name: Zip the Build
+        run: zip -r mkdocs_latest ./site/
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: latest
+          name: Release latest
+          files: |
+            mkdocs_latest.zip
