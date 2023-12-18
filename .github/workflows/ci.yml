@@ -35,5 +35,7 @@ jobs:
         with:
           tag_name: latest
           name: Release latest
+          prerelease: true
+          body: 该 Release 由 Github_actions 自动构建
           files: |
             mkdocs_latest.zip
