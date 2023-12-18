@@ -28,9 +28,9 @@ jobs:
       - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
       - run: ls -l
-      - run: ls -l site
+      - run: mv site mkdocs
       - name: Zip the Build
-        run: zip -r mkdocs_latest ./site/
+        run: zip -r mkdocs_latest ./mkdocs/
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
