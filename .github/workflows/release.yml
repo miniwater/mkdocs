@@ -12,7 +12,8 @@ jobs:
         run: zip -r ${{ steps.get_version.outputs.VERSION }}} ./docs/
       - name: Release
         uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
         with:
+          tag_name: latest
+          name: Release latest
           files: |
             ${{ steps.get_version.outputs.VERSION }}}.zip
