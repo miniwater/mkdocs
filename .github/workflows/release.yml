@@ -9,11 +9,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Zip the Build
-        run: zip -r ${{ steps.get_version.outputs.VERSION }}} ./docs/
+        run: zip -r mkdocs_latest ./docs/
+        run: ls -l
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: latest
           name: Release latest
           files: |
-            ${{ steps.get_version.outputs.VERSION }}}.zip
+            mkdocs_latest.zip
