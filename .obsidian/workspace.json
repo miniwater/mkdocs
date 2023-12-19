@@ -4,21 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "7de4be3c1fb86e44",
+        "id": "767c80bde3de67ec",
         "type": "tabs",
         "children": [
           {
-            "id": "a7cdcffec95bd668",
+            "id": "b803159cf1c99234",
             "type": "leaf",
             "state": {
-              "type": "canvas",
+              "type": "markdown",
               "state": {
-                "file": "未命名.canvas",
-                "viewState": {
-                  "x": 0,
-                  "y": 0,
-                  "zoom": 0
-                }
+                "file": "docs/编程语言/Markdown/Markdown.md",
+                "mode": "preview",
+                "source": false
               }
             }
           }
@@ -88,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "未命名.canvas",
+                "file": "docs/编程语言/Markdown/Markdown.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -105,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "未命名.canvas",
+                "file": "docs/编程语言/Markdown/Markdown.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -128,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "未命名.canvas"
+                "file": "docs/编程语言/Markdown/Markdown.md"
               }
             }
           }
@@ -136,8 +133,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -149,10 +145,11 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "a7cdcffec95bd668",
+  "active": "12f75181e7fd01da",
   "lastOpenFiles": [
-    "docs/index.md",
+    "docs/工具命令/Docker.md",
     "未命名.canvas",
+    "docs/index.md",
     "docs/日记/2023/12-07.md",
     "docs/系统/Linux.md",
     "docs/导航.md",
