@@ -10,7 +10,6 @@ COPY mkdocs.yml /home/mkdocs.yml
 RUN pip install mkdocs-material
 
 WORKDIR /home/docs
-RUN mkdocs serve
 EXPOSE 8000
 
 # Start development server by default
