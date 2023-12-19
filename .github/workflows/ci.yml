@@ -8,6 +8,7 @@ env:
   IMAGE_NAME: ${{ github.repository }}
 permissions:
   contents: write
+  packages: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
