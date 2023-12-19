@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - master 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 permissions:
   contents: write
 jobs:
@@ -27,6 +30,8 @@ jobs:
             mkdocs-material-
       - run: pip install mkdocs-material 
       - run: mkdocs gh-deploy --force
+
+      # 自动发布release
       - run: mv site mkdocs
       - name: Zip the Build
         run: zip -r mkdocs_latest ./mkdocs/
@@ -39,3 +44,23 @@ jobs:
           body: 该 Release 由 Github_actions 自动构建
           files: |
             mkdocs_latest.zip
+
+      # 自动发布docker
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build and push Docker image of Dockerfile
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
