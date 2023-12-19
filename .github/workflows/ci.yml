@@ -7,8 +7,9 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 permissions:
-  contents: write
-  packages: write
+  write-all
+  # contents: write
+  # packages: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
