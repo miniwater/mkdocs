@@ -64,7 +64,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: |
-            miniwater/${{ env.IMAGE_NAME }}
+            miniwater/mkdocs
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Build and push Docker image of Dockerfile
         uses: docker/build-push-action@v5
