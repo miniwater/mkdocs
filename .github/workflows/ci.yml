@@ -7,9 +7,9 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 permissions:
-  write-all
-  # contents: write
-  # packages: write
+  # write-all
+  contents: write
+  packages: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -64,5 +64,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: miniwater/mkdocs:latest
+          # tags: miniwater/mkdocs:latest
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
