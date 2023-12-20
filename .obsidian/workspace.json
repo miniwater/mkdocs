@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/数据库/MySQL.md",
-                "mode": "source",
+                "file": "docs/工具命令/Git.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/数据库/MySQL.md",
+                "file": "docs/工具命令/Git.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/数据库/MySQL.md",
+                "file": "docs/工具命令/Git.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/数据库/MySQL.md"
+                "file": "docs/工具命令/Git.md"
               }
             }
           }
@@ -148,12 +148,16 @@
   },
   "active": "b557c69ee1ad110a",
   "lastOpenFiles": [
+    "docs/工具命令/Jupyter.md",
     "docs/编程语言/Markdown/Markdown.md",
+    "docs/模板/HTML5.md",
+    "docs/日记/2023/2023-12-07.md",
+    "docs/日记/2023/2023-12-20.md",
+    "docs/数据库/MySQL.md",
     "docs/编程语言/Markdown/Mermaid.js.md",
     "docs/工具命令/Docker.md",
     "未命名.canvas",
     "docs/index.md",
-    "docs/日记/2023/12-07.md",
     "docs/系统/Linux.md",
     "docs/导航.md",
     "2023-12-19.md",
