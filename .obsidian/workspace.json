@@ -11,8 +11,12 @@
             "id": "528ac078c12c682b",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "docs/骚话.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/工具命令/Git.md",
+                "file": "docs/骚话.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/工具命令/Git.md",
+                "file": "docs/骚话.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -121,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/工具命令/Git.md"
+                "file": "docs/骚话.md"
               }
             }
           }
@@ -142,7 +146,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "36243484337ac5fb",
+  "active": "528ac078c12c682b",
   "lastOpenFiles": [
     "docs/工具命令/Jupyter.md",
     "docs/编程语言/Markdown/Markdown.md",
