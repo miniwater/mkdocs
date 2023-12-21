@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "676a7f5f3b726634",
+        "id": "5bf8bb8444c3f5a9",
         "type": "tabs",
         "children": [
           {
-            "id": "b557c69ee1ad110a",
+            "id": "528ac078c12c682b",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/工具命令/Git.md",
-                "mode": "preview",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -146,7 +142,7 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "b557c69ee1ad110a",
+  "active": "36243484337ac5fb",
   "lastOpenFiles": [
     "docs/工具命令/Jupyter.md",
     "docs/编程语言/Markdown/Markdown.md",
