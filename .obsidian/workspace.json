@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/骚话.md",
+                "file": "docs/日记/2023/2023-12-20.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/骚话.md",
+                "file": "docs/日记/2023/2023-12-20.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/骚话.md",
+                "file": "docs/日记/2023/2023-12-20.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/骚话.md"
+                "file": "docs/日记/2023/2023-12-20.md"
               }
             }
           }
@@ -148,6 +148,7 @@
   },
   "active": "528ac078c12c682b",
   "lastOpenFiles": [
+    "docs/骚话.md",
     "docs/工具命令/Jupyter.md",
     "docs/编程语言/Markdown/Markdown.md",
     "docs/模板/HTML5.md",
@@ -162,7 +163,6 @@
     "docs/导航.md",
     "2023-12-19.md",
     "docs/Emoji.md",
-    "docs/assets/logo.png",
-    "docs/骚话.md"
+    "docs/assets/logo.png"
   ]
 }
