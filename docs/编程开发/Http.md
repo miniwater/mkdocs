@@ -707,7 +707,15 @@ HTTPS 的报文摘要功能之所以安全，是因为它结合了加密和认�
 
 ## HTTP版本
 
-### HTTP/1.x 缺陷
+### HTTP/1.1
+
+- 默认是长连接
+- 支持流水线
+- 支持同时打开多个 TCP 连接
+- 支持虚拟主机
+- 新增状态码 100
+- 支持分块传输编码
+- 新增缓存处理指令 max-age
 
 HTTP/1.x 实现简单是以牺牲性能为代价的：
 
@@ -715,11 +723,9 @@ HTTP/1.x 实现简单是以牺牲性能为代价的：
 - 不会压缩请求和响应首部，从而导致不必要的网络流量；
 - 不支持有效的资源优先级，致使底层 TCP 连接的利用率低下。
 
-## HTTP/2.0
+### HTTP/2.0
 
-
-
-### 二进制分帧层
+#### 二进制分帧层
 
 HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式的。
 
@@ -733,13 +739,13 @@ HTTP/2.0 将报文分成 HEADERS 帧和 DATA 帧，它们都是二进制格式�
 
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/af198da1-2480-4043-b07f-a3b91a88b815.png" width="600"/> </div><br>
 
-### 服务端推送
+#### 服务端推送
 
 HTTP/2.0 在客户端请求一个资源时，会把相关的资源一起发送给客户端，客户端就不需要再次发起请求了。例如客户端请求 page.html 页面，服务端就把 script.js 和 style.css 等与之相关的资源一起发给客户端。
 
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e3f1657c-80fc-4dfa-9643-bf51abd201c6.png" width="800"/> </div><br>
 
-### 首部压缩
+#### 首部压缩
 
 HTTP/1.1 的首部带有大量信息，而且每次都要重复发送。
 
@@ -749,17 +755,11 @@ HTTP/2.0 要求客户端和服务器同时维护和更新一个包含之前见�
 
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/_u4E0B_u8F7D.png" width="600"/> </div><br>
 
-## HTTP/1.1 新特性
+### HTTP/3.0
 
-详细内容请见上文
+HTTP 3.0 于 2022 年 6 月 6 日正式发布，IETF 把 HTTP 3.0 标准制定在了 RFC 9114 中，HTTP 3.0 其实相较于 HTTP 2.0 要比 HTTP 2.0 相较于 HTTP 1.1 的变化来说小很多，最大的提升就在于效率，替换 TCP 协议为 UDP 协议，HTTP 3.0 具有更低的延迟，它的效率甚至要比 HTTP 1.1 快 3 倍以上。
 
-- 默认是长连接
-- 支持流水线
-- 支持同时打开多个 TCP 连接
-- 支持虚拟主机
-- 新增状态码 100
-- 支持分块传输编码
-- 新增缓存处理指令 max-age
+Google 就更起炉灶搞了一个基于 UDP 协议的 QUIC 协议，并且使用在了 HTTP/3 上，HTTP/3 之前名为 HTTP-over-QUIC。
 
 ## GET 和 POST 比较
 
