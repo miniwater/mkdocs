@@ -161,6 +161,82 @@ CONNECT www.example.com:443 HTTP/1.1
 
 - [rfc2616：9 Method Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
 
+### 参数
+
+GET 和 POST 的请求都能使用额外的参数，但是 GET 的参数是以查询字符串出现在 URL 中，而 POST 的参数存储在实体主体中。不能因为 POST 参数存储在实体主体中就认为它的安全性更高，因为照样可以通过一些抓包工具（Fiddler）查看。
+
+因为 URL 只支持 ASCII 码，因此 GET 的参数中如果存在中文等字符就需要先进行编码。例如 `中文` 会转换为 `%E4%B8%AD%E6%96%87`，而空格会转换为 `%20`。POST 参数支持标准字符集。
+
+```
+GET /test/demo_form.asp?name1=value1&name2=value2 HTTP/1.1
+```
+
+```
+POST /test/demo_form.asp HTTP/1.1
+Host: w3schools.com
+name1=value1&name2=value2
+```
+
+### 可缓存
+
+如果要对响应进行缓存，需要满足以下条件：
+
+- 请求报文的 HTTP 方法本身是可缓存的，包括 GET 和 HEAD，但是 PUT 和 DELETE 不可缓存，POST 在多数情况下不可缓存的。
+- 响应报文的状态码是可缓存的，包括：200, 203, 204, 206, 300, 301, 404, 405, 410, 414, and 501。
+- 响应报文的 Cache-Control 首部字段没有指定不进行缓存。
+
+### 安全
+
+安全的 HTTP 方法不会改变服务器状态，也就是说它只是可读的。
+
+GET 方法是安全的，而 POST 却不是，因为 POST 的目的是传送实体主体内容，这个内容可能是用户上传的表单数据，上传成功之后，服务器可能把这个数据存储到数据库中，因此状态也就发生了改变。
+
+安全的方法除了 GET 之外还有：HEAD、OPTIONS。
+
+不安全的方法除了 POST 之外还有 PUT、DELETE。
+
+### 幂等性
+
+幂等的 HTTP 方法，同样的请求被执行一次与连续执行多次的效果是一样的，服务器的状态也是一样的。换句话说就是，幂等方法不应该具有副作用（统计用途除外）。
+
+所有的安全方法也都是幂等的。
+
+在正确实现的条件下，GET，HEAD，PUT 和 DELETE 等方法都是幂等的，而 POST 方法不是。
+
+GET /pageX HTTP/1.1 是幂等的，连续调用多次，客户端接收到的结果都是一样的：
+
+```
+GET /pageX HTTP/1.1
+GET /pageX HTTP/1.1
+GET /pageX HTTP/1.1
+GET /pageX HTTP/1.1
+```
+
+POST /add_row HTTP/1.1 不是幂等的，如果调用多次，就会增加多行记录：
+
+```
+POST /add_row HTTP/1.1   -> Adds a 1nd row
+POST /add_row HTTP/1.1   -> Adds a 2nd row
+POST /add_row HTTP/1.1   -> Adds a 3rd row
+```
+
+DELETE /idX/delete HTTP/1.1 是幂等的，即使不同的请求接收到的状态码不一样：
+
+```
+DELETE /idX/delete HTTP/1.1   -> Returns 200 if idX exists
+DELETE /idX/delete HTTP/1.1   -> Returns 404 as it just got deleted
+DELETE /idX/delete HTTP/1.1   -> Returns 404
+```
+
+### XMLHttpRequest
+
+为了阐述 POST 和 GET 的另一个区别，需要先了解 XMLHttpRequest：
+
+> XMLHttpRequest 是一个 API，它为客户端提供了在客户端和服务器之间传输数据的功能。它提供了一个通过 URL 来获取数据的简单方式，并且不会使整个页面刷新。这使得网页只更新一部分页面而不会打扰到用户。XMLHttpRequest 在 AJAX 中被大量使用。
+
+- 在使用 XMLHttpRequest 的 POST 方法时，浏览器会先发送 Header 再发送 Data。但并不是所有浏览器会这么做，例如火狐就不会。
+- 而 GET 方法 Header 和 Data 会一起发送。
+
 ## HTTP 状态码
 
 服务器返回的   **响应报文**   中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。
@@ -760,115 +836,3 @@ HTTP/2.0 要求客户端和服务器同时维护和更新一个包含之前见�
 HTTP 3.0 于 2022 年 6 月 6 日正式发布，IETF 把 HTTP 3.0 标准制定在了 RFC 9114 中，HTTP 3.0 其实相较于 HTTP 2.0 要比 HTTP 2.0 相较于 HTTP 1.1 的变化来说小很多，最大的提升就在于效率，替换 TCP 协议为 UDP 协议，HTTP 3.0 具有更低的延迟，它的效率甚至要比 HTTP 1.1 快 3 倍以上。
 
 Google 就更起炉灶搞了一个基于 UDP 协议的 QUIC 协议，并且使用在了 HTTP/3 上，HTTP/3 之前名为 HTTP-over-QUIC。
-
-## GET 和 POST 比较
-
-### 作用
-
-GET 用于获取资源，而 POST 用于传输实体主体。
-
-### 参数
-
-GET 和 POST 的请求都能使用额外的参数，但是 GET 的参数是以查询字符串出现在 URL 中，而 POST 的参数存储在实体主体中。不能因为 POST 参数存储在实体主体中就认为它的安全性更高，因为照样可以通过一些抓包工具（Fiddler）查看。
-
-因为 URL 只支持 ASCII 码，因此 GET 的参数中如果存在中文等字符就需要先进行编码。例如 `中文` 会转换为 `%E4%B8%AD%E6%96%87`，而空格会转换为 `%20`。POST 参数支持标准字符集。
-
-```
-GET /test/demo_form.asp?name1=value1&name2=value2 HTTP/1.1
-```
-
-```
-POST /test/demo_form.asp HTTP/1.1
-Host: w3schools.com
-name1=value1&name2=value2
-```
-
-### 安全
-
-安全的 HTTP 方法不会改变服务器状态，也就是说它只是可读的。
-
-GET 方法是安全的，而 POST 却不是，因为 POST 的目的是传送实体主体内容，这个内容可能是用户上传的表单数据，上传成功之后，服务器可能把这个数据存储到数据库中，因此状态也就发生了改变。
-
-安全的方法除了 GET 之外还有：HEAD、OPTIONS。
-
-不安全的方法除了 POST 之外还有 PUT、DELETE。
-
-### 幂等性
-
-幂等的 HTTP 方法，同样的请求被执行一次与连续执行多次的效果是一样的，服务器的状态也是一样的。换句话说就是，幂等方法不应该具有副作用（统计用途除外）。
-
-所有的安全方法也都是幂等的。
-
-在正确实现的条件下，GET，HEAD，PUT 和 DELETE 等方法都是幂等的，而 POST 方法不是。
-
-GET /pageX HTTP/1.1 是幂等的，连续调用多次，客户端接收到的结果都是一样的：
-
-```
-GET /pageX HTTP/1.1
-GET /pageX HTTP/1.1
-GET /pageX HTTP/1.1
-GET /pageX HTTP/1.1
-```
-
-POST /add_row HTTP/1.1 不是幂等的，如果调用多次，就会增加多行记录：
-
-```
-POST /add_row HTTP/1.1   -> Adds a 1nd row
-POST /add_row HTTP/1.1   -> Adds a 2nd row
-POST /add_row HTTP/1.1   -> Adds a 3rd row
-```
-
-DELETE /idX/delete HTTP/1.1 是幂等的，即使不同的请求接收到的状态码不一样：
-
-```
-DELETE /idX/delete HTTP/1.1   -> Returns 200 if idX exists
-DELETE /idX/delete HTTP/1.1   -> Returns 404 as it just got deleted
-DELETE /idX/delete HTTP/1.1   -> Returns 404
-```
-
-### 可缓存
-
-如果要对响应进行缓存，需要满足以下条件：
-
-- 请求报文的 HTTP 方法本身是可缓存的，包括 GET 和 HEAD，但是 PUT 和 DELETE 不可缓存，POST 在多数情况下不可缓存的。
-- 响应报文的状态码是可缓存的，包括：200, 203, 204, 206, 300, 301, 404, 405, 410, 414, and 501。
-- 响应报文的 Cache-Control 首部字段没有指定不进行缓存。
-
-### XMLHttpRequest
-
-为了阐述 POST 和 GET 的另一个区别，需要先了解 XMLHttpRequest：
-
-> XMLHttpRequest 是一个 API，它为客户端提供了在客户端和服务器之间传输数据的功能。它提供了一个通过 URL 来获取数据的简单方式，并且不会使整个页面刷新。这使得网页只更新一部分页面而不会打扰到用户。XMLHttpRequest 在 AJAX 中被大量使用。
-
-- 在使用 XMLHttpRequest 的 POST 方法时，浏览器会先发送 Header 再发送 Data。但并不是所有浏览器会这么做，例如火狐就不会。
-- 而 GET 方法 Header 和 Data 会一起发送。
-
-## 参考资料
-
-- 上野宣. 图解 HTTP[M]. 人民邮电出版社, 2014.
-- [MDN : HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP)
-- [HTTP/2 简介](https://developers.google.com/web/fundamentals/performance/http2/?hl=zh-cn)
-- [htmlspecialchars](http://php.net/manual/zh/function.htmlspecialchars.php)
-- [Difference between file URI and URL in java](http://java2db.com/java-io/how-to-get-and-the-difference-between-file-uri-and-url-in-java)
-- [How to Fix SQL Injection Using Java PreparedStatement & CallableStatement](https://software-security.sans.org/developer-how-to/fix-sql-injection-in-java-using-prepared-callable-statement)
-- [浅谈 HTTP 中 Get 与 Post 的区别](https://www.cnblogs.com/hyddd/archive/2009/03/31/1426026.html)
-- [Are http:// and www really necessary?](https://www.webdancers.com/are-http-and-www-necesary/)
-- [HTTP (HyperText Transfer Protocol)](https://www.ntu.edu.sg/home/ehchua/programming/webprogramming/HTTP_Basics.html)
-- [Web-VPN: Secure Proxies with SPDY & Chrome](https://www.igvita.com/2011/12/01/web-vpn-secure-proxies-with-spdy-chrome/)
-- [File:HTTP persistent connection.svg](http://en.wikipedia.org/wiki/File:HTTP_persistent_connection.svg)
-- [Proxy server](https://en.wikipedia.org/wiki/Proxy_server)
-- [What Is This HTTPS/SSL Thing And Why Should You Care?](https://www.x-cart.com/blog/what-is-https-and-ssl.html)
-- [What is SSL Offloading?](https://securebox.comodo.com/ssl-sniffing/ssl-offloading/)
-- [Sun Directory Server Enterprise Edition 7.0 Reference - Key Encryption](https://docs.oracle.com/cd/E19424-01/820-4811/6ng8i26bn/index.html)
-- [An Introduction to Mutual SSL Authentication](https://www.codeproject.com/Articles/326574/An-Introduction-to-Mutual-SSL-Authentication)
-- [The Difference Between URLs and URIs](https://danielmiessler.com/study/url-uri/)
-- [Cookie 与 Session 的区别](https://juejin.im/entry/5766c29d6be3ff006a31b84e#comment)
-- [COOKIE 和 SESSION 有什么区别](https://www.zhihu.com/question/19786827)
-- [Cookie/Session 的机制与安全](https://harttle.land/2015/08/10/cookie-session.html)
-- [HTTPS 证书原理](https://shijianan.com/2017/06/11/https/)
-- [What is the difference between a URI, a URL and a URN?](https://stackoverflow.com/questions/176264/what-is-the-difference-between-a-uri-a-url-and-a-urn)
-- [XMLHttpRequest](https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest)
-- [XMLHttpRequest (XHR) Uses Multiple Packets for HTTP POST?](https://blog.josephscott.org/2009/08/27/xmlhttprequest-xhr-uses-multiple-packets-for-http-post/)
-- [Symmetric vs. Asymmetric Encryption – What are differences?](https://www.ssl2buy.com/wiki/symmetric-vs-asymmetric-encryption-what-are-differences)
-- [Web 性能优化与 HTTP/2](https://www.kancloud.cn/digest/web-performance-http2)
-- [HTTP/2 简介](https://developers.google.com/web/fundamentals/performance/http2/?hl=zh-cn)
