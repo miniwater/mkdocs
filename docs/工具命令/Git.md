@@ -197,3 +197,12 @@ git pull
 <https://shields.io/>
 
 <https://star-history.com/>
+
+## 常见问题
+
+添加了.gitignore 但是不生效
+
+```shell
+git rm -r --cached .
+git add .
+```
