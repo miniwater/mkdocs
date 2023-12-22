@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/数据库/Redis2.md",
-                "mode": "source",
+                "file": "docs/数据库/Redis.md",
+                "mode": "preview",
                 "source": false
               }
             }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/数据库/Redis2.md",
+                "file": "docs/数据库/Redis.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/数据库/Redis2.md",
+                "file": "docs/数据库/Redis.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/数据库/Redis2.md"
+                "file": "docs/数据库/Redis.md"
               }
             }
           }
@@ -148,6 +148,10 @@
   },
   "active": "d8147480fe30a431",
   "lastOpenFiles": [
+    "docs/数据库/MySQL.md",
+    "docs/数据库/MySQL2.md",
+    "docs/数据库/Redis2.md",
+    "docs/数据库/Redis.md",
     "docs/对照表/Android Manifest 权限描述.md",
     "docs/对照表/常见端口.md",
     "docs/工具命令/正则表达式.md",
@@ -163,7 +167,6 @@
     "docs/编程语言/Markdown/Markdown.md",
     "docs/模板/HTML5.md",
     "docs/日记/2023/2023-12-07.md",
-    "docs/数据库/MySQL.md",
     "docs/编程语言/Markdown/Mermaid.js.md",
     "docs/工具命令/Docker.md",
     "未命名.canvas",
