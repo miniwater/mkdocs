@@ -161,7 +161,7 @@ CONNECT www.example.com:443 HTTP/1.1
 
 - [rfc2616：9 Method Definitions](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html)
 
-## 三、HTTP 状态码
+## HTTP 状态码
 
 服务器返回的   **响应报文**   中第一行为状态行，包含了状态码以及原因短语，用来告知客户端请求的结果。
 
@@ -215,7 +215,7 @@ CONNECT www.example.com:443 HTTP/1.1
 
 -   **503 Service Unavailable**  ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
 
-## 四、HTTP 首部
+## HTTP 首部
 
 有 4 种类型的首部字段：通用首部字段、请求首部字段、响应首部字段和实体首部字段。
 
@@ -288,11 +288,9 @@ CONNECT www.example.com:443 HTTP/1.1
 | Expires | 实体主体过期的日期时间 |
 | Last-Modified | 资源的最后修改日期时间 |
 
-## 五、具体应用
+## 具体应用
 
 ### 连接管理
-
-<div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/HTTP1_x_Connections.png" width="800"/> </div><br>
 
 #### 1. 短连接与长连接
 
@@ -635,7 +633,7 @@ HTTP/1.1 使用虚拟主机技术，使得一台服务器拥有多个域名，�
 
 使用 SSL 等加密手段，在客户端和服务器之间建立一条安全的通信线路。
 
-## 六、HTTPS
+## HTTPS
 
 HTTP 有以下安全性问题：
 
@@ -707,7 +705,7 @@ HTTPS 的报文摘要功能之所以安全，是因为它结合了加密和认�
 - 因为需要进行加密解密等过程，因此速度会更慢；
 - 需要支付证书授权的高额费用。
 
-## 七、HTTP/2.0
+## HTTP版本
 
 ### HTTP/1.x 缺陷
 
@@ -716,6 +714,10 @@ HTTP/1.x 实现简单是以牺牲性能为代价的：
 - 客户端需要使用多个连接才能实现并发和缩短延迟；
 - 不会压缩请求和响应首部，从而导致不必要的网络流量；
 - 不支持有效的资源优先级，致使底层 TCP 连接的利用率低下。
+
+## HTTP/2.0
+
+
 
 ### 二进制分帧层
 
@@ -747,7 +749,7 @@ HTTP/2.0 要求客户端和服务器同时维护和更新一个包含之前见�
 
 <div align="center"> <img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/_u4E0B_u8F7D.png" width="600"/> </div><br>
 
-## 八、HTTP/1.1 新特性
+## HTTP/1.1 新特性
 
 详细内容请见上文
 
@@ -759,7 +761,7 @@ HTTP/2.0 要求客户端和服务器同时维护和更新一个包含之前见�
 - 支持分块传输编码
 - 新增缓存处理指令 max-age
 
-## 九、GET 和 POST 比较
+## GET 和 POST 比较
 
 ### 作用
 
