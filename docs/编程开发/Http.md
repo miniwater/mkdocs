@@ -291,7 +291,7 @@ DELETE /idX/delete HTTP/1.1   -> Returns 404
 
 -   **503 Service Unavailable**  ：服务器暂时处于超负载或正在进行停机维护，现在无法处理请求。
 
-## HTTP 首部
+## HTTP Head 首部
 
 有 4 种类型的首部字段：通用首部字段、请求首部字段、响应首部字段和实体首部字段。
 
