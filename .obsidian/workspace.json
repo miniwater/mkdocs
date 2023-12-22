@@ -4,19 +4,15 @@
     "type": "split",
     "children": [
       {
-        "id": "e993b53d91facef6",
+        "id": "f0aa86f3992c23a0",
         "type": "tabs",
         "children": [
           {
-            "id": "5d53f0ada80910fa",
+            "id": "d8147480fe30a431",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "docs/工具命令/正则表达式.md",
-                "mode": "preview",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
         ]
@@ -65,8 +61,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
@@ -86,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/工具命令/正则表达式.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/工具命令/正则表达式.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "docs/工具命令/正则表达式.md"
-              }
+              "state": {}
             }
           }
         ],
@@ -147,9 +138,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "5d53f0ada80910fa",
+  "active": "d8147480fe30a431",
   "lastOpenFiles": [
     "docs/对照表/常见端口.md",
+    "docs/工具命令/正则表达式.md",
     "docs/对照表/Ascii码.md",
     "docs/对照表/Content-Type.md",
     "docs/对照表/HTTP状态码.md",
