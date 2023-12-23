@@ -375,7 +375,7 @@ sequenceDiagram
     C->>+S: SYN=1, seq=x
     S-->>-C: SYN=1, ACK=1, seq=y, ack=x+1
     C->>S: ACK=1, seq=x+1, ack=y+1
-	Note over C,S: A typical interaction
+	Note over C,S: 数据传输
 	C->>S: FIN=1, seq=u
 	S-->>C: ACK=1, seq=v, ack=u+1
 	S-->>C: FIN=1, ACK=1, seq=w, ack=u+1
@@ -394,13 +394,80 @@ SYN：同步序列编号（Synchronize Sequence Numbers），其中包含自己�
 
 两次握手只保证了一方的初始序列号能被对方成功接收，没办法保证双方的初始序列号都能被确认接收。
 
+##### 第一次握手丢失
+
+在服务端视角，什么都没发生过。
+
+在客户端视角，如果客户端迟迟收不到服务端的 SYN-ACK 报文（第二次握手），就会触发「超时重传」机制，重传 SYN 报文，而且重传的 SYN 报文的序列号都是一样的。
+
+不同版本的操作系统可能超时时间不同，有的 1 秒的，也有 3 秒的，这个超时时间是写死在内核里的，如果想要更改则需要重新编译内核，比较麻烦。
+
+> **这个超时重传时间叫 RTO**：Retransmission Timeout ，TCP中触发超时重传机制的时间，应略大于RTT，不同操作系统设定不同。
+
+在 Linux 里，客户端的 SYN 报文最大重传次数由 `tcp_syn_retries`内核参数控制，这个参数是可以自定义的，默认值一般是 5。
+
+```shell
+cat /proc/sys/net/ipv4/tcp_syn_retries	
+```
+
+通常，第一次超时重传是在 1 秒后，第二次超时重传是在 2 秒，第三次超时重传是在 4 秒后，第四次超时重传是在 8 秒后，第五次是在超时重传 16 秒后。没错，每次超时的时间是上一次的 2 倍。
+
+当第五次超时重传后，会继续等待 32 秒，如果服务端仍然没有回应 ACK，客户端就不再发送 SYN 包，然后断开 TCP 连接。
+
+所以，总耗时是 1+2+4+8+16+32=63 秒，大约 1 分钟左右。
+
 #### 第二次握手
 
 第二次握手：[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/0?fromModule=lemma_inlink)收到[syn](https://baike.baidu.com/item/syn/0?fromModule=lemma_inlink)包，必须确认客户端的SYN（[ack](https://baike.baidu.com/item/ack/0?fromModule=lemma_inlink)=j+1），同时自己也发送一个SYN包（seq=k），即SYN+ACK包，此时服务器进入[SYN_RECV](https://baike.baidu.com/item/SYN_RECV/0?fromModule=lemma_inlink)状态。
 
+##### 第二次握手丢失
+
+> 在客户端视角，与第一次握手丢失一致，触发超时重传机制。
+
+在服务端视角，如果第二次握手丢失了，服务端就收不到第三次握手，于是服务端这边会触发超时重传机制，重传 SYN-ACK 报文。
+
+在 Linux 下，SYN-ACK 报文的最大重传次数由 tcp_synack_retries内核参数决定，默认值是 5。
+
+```shell
+cat /proc/sys/net/ipv4/tcp_synack_retries
+```
+
+因此，当第二次握手丢失了，客户端和服务端都会重传。
+
 #### 第三次握手
 
 第三次握手：[客户端](https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/0?fromModule=lemma_inlink)收到[服务](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1/0?fromModule=lemma_inlink)器的SYN+ACK包，向[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/0?fromModule=lemma_inlink)发送确认包ACK([ack](https://baike.baidu.com/item/ack/0?fromModule=lemma_inlink)=k+1)，此包发送完毕，客户端和服务器进入[ESTABLISHED](https://baike.baidu.com/item/ESTABLISHED/0?fromModule=lemma_inlink)（TCP连接成功）状态，完成三次握手。
+
+##### 第三次握手丢失
+
+在服务端视角，与第二次握手丢失一致，触发超时重传机制。
+
+在客户端视角，无下文，最终跟服务端各自断开连接。
+
+#### 第一次挥手
+
+每个方向都需要**一个 FIN 和一个 ACK**，因此通常被称为**四次挥手**
+
+客户端打算关闭连接，此时会发送一个 TCP 首部 FIN 标志位被置为 1 的报文，也即 FIN 报文，之后客户端进入 FIN_WAIT_1 状态。
+
+##### 第一次挥手丢失
+
+在服务端视角，什么都没发生过。
+
+在客户端视角，如果第一次挥手丢失了，那么客户端迟迟收不到被动方的 ACK 的话，也就会触发超时重传机制，重传 FIN 报文，重发次数由 tcp_orphan_retries 参数控制。
+
+当客户端重传 FIN 报文的次数超过 tcp_orphan_retries 后，就不再发送 FIN 报文，则会在等待一段时间（时间为上一次超时时间的 2 倍），如果还是没能收到第二次挥手，那么直接进入到 close 状态。
+
+#### 第二次挥手
+
+##### 第二次挥手丢失
+
+在客户端视角，与第一次挥手丢失一致，触发超时重传机制。
+
+在服务端视角，
+
+#### 第三次挥手
+
 
 ### 连接管理
 
