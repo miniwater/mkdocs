@@ -386,7 +386,7 @@ sequenceDiagram
 
 第一次握手：建立连接时，[客户端](https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/0?fromModule=lemma_inlink)发送[syn](https://baike.baidu.com/item/syn/0?fromModule=lemma_inlink)包（seq=j）到[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/0?fromModule=lemma_inlink)，并进入[SYN_SENT](https://baike.baidu.com/item/SYN_SENT/0?fromModule=lemma_inlink)状态，等待服务器确认；
 
-SYN：同步序列编号（Synchronize Sequence Numbers），双方都必须维护双方序列号，作用：
+SYN：同步序列编号（Synchronize Sequence Numbers），双方都必须维护一个序列号，作用：
 
 - 接收方可以去除重复的数据；
 - 接收方可以根据数据包的序列号按序接收；
