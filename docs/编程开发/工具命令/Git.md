@@ -2,6 +2,8 @@
 
 Github教程:<https://docs.github.com/en/get-started/getting-started-with-git/setting-your-username-in-git>
 
+推送push 拉取pull
+
 用sourcetree管理
 
 查看配置信息
@@ -70,7 +72,7 @@ Github：Settings->Developer settings->Personal access token->Tokens(classic)
 git push -u origin "master"
 ```
 
-## 已有
+## 克隆
 
 克隆
 
@@ -78,53 +80,69 @@ git push -u origin "master"
 git clone <repo> <directory>
 ```
 
+## 切换分支
+
+查看分支名称
+
+```shell
+git branch -a
+```
+
+切换分支
+
+```shell
+git switch 分支名称
+
+git switch master
+```
+
 ## 常用命令
 
 提交暂存文件
 
-```git
+```shell
 git add .
 ```
 
 撤销暂存
 
-```git
+```shell
 git reset HEAD
 ```
 
 撤销滚暂存前的修改
 
-```git
+```shell
 git checkout .
 ```
 
 撤销全部修改（包括暂存）
 
-```git
+```shell
 git checkout HEAD .
 ```
 
 提交暂存文件
 
-```git
+```shell
 git commit -m '备注'
 ```
 
 当前状态
 
-```
+```shell
 git status
 ```
 
 比较暂存区和工作区差异
 
-```
+```shell
 git diff
 ```
 
 回退
 
-```
+```shell
 git reset HEAD^            # 回退所有内容到上一个版本  
 git reset HEAD^ hello.php  # 回退 hello.php 文件的版本到上一个版本  
 git reset  052e           # 回退到指定版本
@@ -132,31 +150,31 @@ git reset  052e           # 回退到指定版本
 
 提交历史
 
-```
+```shell
 git log
 ```
 
 创建分支
 
-```
+```shell
 git branch (branchname)
 ```
 
 切换分支
 
-```
+```shell
 git checkout (branchname)
 ```
 
 合并release分支
 
-```
+```shell
 git merge release
 ```
 
 标签
 
-```
+```shell
 git tag -a v1.0 
 ```
 
@@ -165,17 +183,17 @@ git tag -a v1.0
 
 推
 
-```
+```shell
 git push
 ```
 
 拉
 
-```
+```shell
 git pull
 ```
 
-```
+```shell
 git remote -v
 
 git remote rm origin
@@ -197,3 +215,12 @@ git pull
 <https://shields.io/>
 
 <https://star-history.com/>
+
+## 常见问题
+
+添加了.gitignore 但是不生效
+
+```shell
+git rm -r --cached .
+git add .
+```
