@@ -368,7 +368,31 @@ DELETE /idX/delete HTTP/1.1   -> Returns 404
 
 ### TCP握手
 
+```mermaid
+sequenceDiagram
+	participant C as 客户端Client
+    participant S as 服务端Service
+    C->>+S: SYN=1, seq=x
+    S-->>-C: SYN=1, ACK=1, seq=y, ack=x+1
+    C->>S: ACK=1, seq=x+1, ack=y+1
+	Note over C,S: A typical interaction
+	C->>S: FIN=1, seq=u
+	S-->>C: ACK=1, seq=v, ack=u+1
+	S-->>C: FIN=1, ACK=1, seq=w, ack=u+1
+	C->>S: ACK=1, seq=u+1, ack=w+1
+```
 
+#### 第一次握手
+
+第一次握手：建立连接时，[客户端](https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/0?fromModule=lemma_inlink)发送[syn](https://baike.baidu.com/item/syn/0?fromModule=lemma_inlink)包（seq=j）到[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/0?fromModule=lemma_inlink)，并进入[SYN_SENT](https://baike.baidu.com/item/SYN_SENT/0?fromModule=lemma_inlink)状态，等待服务器确认；SYN：同步序列编号（Synchronize Sequence Numbers）。
+
+#### 第二次握手
+
+第二次握手：[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/0?fromModule=lemma_inlink)收到[syn](https://baike.baidu.com/item/syn/0?fromModule=lemma_inlink)包，必须确认客户端的SYN（[ack](https://baike.baidu.com/item/ack/0?fromModule=lemma_inlink)=j+1），同时自己也发送一个SYN包（seq=k），即SYN+ACK包，此时服务器进入[SYN_RECV](https://baike.baidu.com/item/SYN_RECV/0?fromModule=lemma_inlink)状态。
+
+#### 第三次握手
+
+第三次握手：[客户端](https://baike.baidu.com/item/%E5%AE%A2%E6%88%B7%E7%AB%AF/0?fromModule=lemma_inlink)收到[服务](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1/0?fromModule=lemma_inlink)器的SYN+ACK包，向[服务器](https://baike.baidu.com/item/%E6%9C%8D%E5%8A%A1%E5%99%A8/0?fromModule=lemma_inlink)发送确认包ACK([ack](https://baike.baidu.com/item/ack/0?fromModule=lemma_inlink)=k+1)，此包发送完毕，客户端和服务器进入[ESTABLISHED](https://baike.baidu.com/item/ESTABLISHED/0?fromModule=lemma_inlink)（TCP连接成功）状态，完成三次握手。
 
 ### 连接管理
 
