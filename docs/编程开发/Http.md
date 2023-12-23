@@ -366,6 +366,10 @@ DELETE /idX/delete HTTP/1.1   -> Returns 404
 
 ## 具体应用
 
+### TCP握手
+
+
+
 ### 连接管理
 
 #### 1. 短连接与长连接
