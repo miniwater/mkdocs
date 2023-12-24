@@ -3,6 +3,8 @@
 image：镜像
 volume：卷
 
+windows:`docker run -d -v E:/project/docker/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama`
+
 启动       sudo systemctl start docker
 守护进程重启   sudo systemctl daemon-reload
 重启docker服务  sudo systemctl restart  docker
