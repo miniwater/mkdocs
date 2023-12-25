@@ -3,7 +3,11 @@
 image：镜像
 volume：卷
 
-windows:`docker run -d -v E:/project/docker/ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama`
+windows
+
+i5 13600k慢吞吞版:`docker run -d -v E:/project/docker/ollama:/root/.ollama -p 11434:11434 --name ollama_CPU ollama/ollama`
+
+rtx3060ti急速版(爆显存):`docker run -d --gpus=all -v E:/project/docker/ollama:/root/.ollama -p 11434:11434 --name ollama_GPU ollama/ollama`
 
 启动       sudo systemctl start docker
 守护进程重启   sudo systemctl daemon-reload

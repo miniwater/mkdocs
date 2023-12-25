@@ -2,7 +2,7 @@
 
 ## APP
 
-微信: <weixin://>
+微信: weixin://
 
 支付宝 ：<alipay://>
 
