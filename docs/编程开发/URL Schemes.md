@@ -3,6 +3,7 @@
 ## APP
 
 微信: weixin://
+[测试](weixin://)
 
 支付宝 ：<alipay://>
 
