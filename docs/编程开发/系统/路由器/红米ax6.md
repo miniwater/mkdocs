@@ -1,5 +1,7 @@
 # 红米ax6
 
+刷机包下载：<https://www.right.com.cn/forum/forum.php?mod=forumdisplay&fid=171&filter=typeid&typeid=64>
+
 ## 介绍
 
 df -h
