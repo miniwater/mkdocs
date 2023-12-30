@@ -29,10 +29,29 @@
 
 note
 
-## Docker Run
+## Deploy
+
+### Deploy With Vercel(Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/miniwater/mkdocs)
+
+Just click the button above and follow the instructions to deploy your own copy of the app.
+
+### Deploy With Docker
 
 - <https://hub.docker.com/r/miniwater/mkdocs>
 - <https://github.com/miniwater/mkdocs/pkgs/container/mkdocs>
+
+To deploy with Docker, you can use the following command:
+
+```shell
+docker run --name mkdocs \
+--restart always \
+-p 80:8000 \
+miniwater/mkdocs:master
+```
+
+This will start the geminiprochat service, accessible at <http://localhost:80>.
 
 ## Star History
 
