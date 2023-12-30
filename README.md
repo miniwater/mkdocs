@@ -45,7 +45,7 @@ Just click the button above and follow the instructions to deploy your own copy 
 To deploy with Docker, you can use the following command:
 
 ```shell
-docker run -d --name mkdocs -p 80:8000 miniwater/mkdocs:master
+docker run -d --name mkdocs -p 80:8000 miniwater/mkdocs:latest
 ```
 
 or
@@ -54,7 +54,7 @@ or
 docker run -d --name mkdocs \
 --restart always \
 -p 80:8000 \
-miniwater/mkdocs:master
+miniwater/mkdocs:latest
 ```
 
 This will start the geminiprochat service, accessible at <http://localhost:80>.
