@@ -66,6 +66,8 @@ jobs:
           images: |
             miniwater/mkdocs
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest
       - name: Build and push Docker image of Dockerfile
         uses: docker/build-push-action@v5
         with:
