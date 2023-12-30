@@ -45,13 +45,13 @@ Just click the button above and follow the instructions to deploy your own copy 
 To deploy with Docker, you can use the following command:
 
 ```shell
-docker run --name mkdocs -p 80:8000 miniwater/mkdocs:master
+docker run -d --name mkdocs -p 80:8000 miniwater/mkdocs:master
 ```
 
 or
 
 ```shell
-docker run --name mkdocs \
+docker run -d --name mkdocs \
 --restart always \
 -p 80:8000 \
 miniwater/mkdocs:master
