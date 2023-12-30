@@ -1,6 +1,6 @@
 FROM python:3.11-alpine3.18
 
-MAINTAINER miniwater
+LABEL maintainer="miniwater"
  
 WORKDIR /home
  
@@ -9,7 +9,6 @@ COPY mkdocs.yml /home/mkdocs.yml
  
 RUN pip install mkdocs-material
 
-WORKDIR /home/docs
 EXPOSE 8000
 
 # Start development server by default
