@@ -37,13 +37,13 @@ buckets*4 = max
 
 网上有说法 “nf_conntrack_count 的值持续超过 nf_conntrack_max 的 20% 就该考虑扩容”也是这原因。因为 bucket 的值默认是 max 的 25%，用了 max 的 20% 也就是 80% 的桶都有元素了（假设没冲突）。
 
-`nf_conntrack_expect_max`太小会导致内核报错：`nf_conntrack: expectation table full`
+`nf_conntrack_expect_max`太小会导致内核报错：`nf_conntrack: expectation table full`，华硕1G内存以上高端路由默认为4096
 
 ```conf
 net.netfilter.nf_conntrack_buckets = 16384
 net.nf_conntrack_max = 65536
 
-net.netfilter.nf_conntrack_expect_max = 256
+net.netfilter.nf_conntrack_expect_max = 1024
 ```
 
 保存后执行 `sysctl -p` 使之生效
