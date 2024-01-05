@@ -65,11 +65,42 @@
 |剪切 | mv|
 |快捷键 | ln|
 
+### 文件查看
+
 |     说明    |     命令    |
 | ----------- | ----------- |
 |查阅正在改变的日志文件 | tail -f a.log |
-|查阅日志文件 | cat |
-|查阅最后一行日志 | tac |
+|顺序查阅文件 | cat |
+|倒序查阅文件 | tac |
+
+#### tail
+
+tail
+
+```shell
+# tail 命令不带任何参数，显示文件的最后 10 行。
+tail abc.log
+
+# 显示文件的最后 5 行
+tail -n 5 abc.log
+
+# 显示来自多个文件的最后 5 行
+tail -n 5 abc.log cba.log
+
+# 输出保存到新文本文件
+tail -n 5 abc.log > output.txt
+
+# 输出 追加 到旧文本文件。
+tail -n 5 abc.log >> output.txt
+
+# 实时监视
+tail -f abc.log
+
+# 实时监视，并保持重试，即该文件被删除或改名后，如果再次创建相同的文件名，会继续追踪
+tail -F abc.log
+```
+
+#### 管道语句
 
 ### 文件目录
 
