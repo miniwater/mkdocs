@@ -62,10 +62,10 @@
 |当前目录文件详细列表 | ls -sarln|
 |文件详细 | file package.xml|
 |复制 | cp|
-|剪切 | mv|
+|剪切(重命名) | mv|
 |快捷键 | ln|
 
-### 文件查看
+### 文件查看与操作
 
 |     说明    |     命令    |
 | ----------- | ----------- |
@@ -74,8 +74,6 @@
 |倒序查阅文件 | tac |
 
 #### tail
-
-tail
 
 ```shell
 # tail 命令不带任何参数，显示文件的最后 10 行。
@@ -98,9 +96,79 @@ tail -f abc.log
 
 # 实时监视，并保持重试，即该文件被删除或改名后，如果再次创建相同的文件名，会继续追踪
 tail -F abc.log
+
+# 从文件打印 400字节 4k 4M 数据
+tail -c 400 abc.log
+tail -c 4k abc.log
+tail -c 4M abc.log
+
+# -v 显示文件头标记   -q 隐藏多文件时的头标记
+tail --help
+man tail
 ```
 
-#### 管道语句
+#### cat
+
+```shell
+# 创建空白文件，运行后才是键入内容
+cat > abc.txt
+
+# 将文本附加到文件，不存在则自动新建
+cat >> abc.txt
+
+# 复制文件
+cat  abc.txt > cba.txt
+
+# 将多个文件的内容按顺序附加到一个文件中
+cat abc.txt cba.txt > aaa.txt
+
+# 查看带行尾的文件内容
+cat -E abc.txt 
+
+# 显示所有txt文件内容
+cat *.txt
+
+# 显示行号
+cat -n abc.txt 
+
+# 显示制表符 tab出来的空格
+cat -T abc.txt
+
+# 以可滚动和可搜索的方式使用键查看文件的内容
+# more命令和less命令相似，但没有less命令强大
+# 空格键       下一页
+# b键          上一页
+# 回车/向下键   下一行
+# y/向上键      上一行
+# d键          下半页
+# u键          上半页
+# q键           退出
+cat abc.txt | less
+
+# 以二进制格式显示文件内容
+cat abc.txt | xxd -b
+
+# 以十六进制格式显示文件内容
+cat abc.txt | hexdump -C
+
+# 显示文件的特定行
+cat abc.txt | sed -n '3,6p'
+
+# 不显示特殊字符
+cat -v abc.txt
+
+# 按字母顺序对文件内容进行排序
+cat abc.txt | sort
+
+# 在文件中显示文件结束标记(在输入EOF自动结束输入)
+cat > abc.txt << EOF
+
+# 倒序显示文件内容
+tac abc.txt 
+
+cat --help
+man cat
+```
 
 ### 文件目录
 
