@@ -59,6 +59,10 @@ miniwater/mkdocs:latest
 
 This will start the geminiprochat service, accessible at <http://localhost:80>.
 
+## Contributing
+
+Contributions of all types are more than welcome; if you are interested in contributing code, feel free to check out our GitHub [Issues][github-issues-link] and [Projects][github-project-link] to get stuck in to show us what you’re made of.
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=miniwater/mkdocs&type=Date)](https://star-history.com/#miniwater/mkdocs&Date)
