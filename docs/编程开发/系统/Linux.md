@@ -63,23 +63,23 @@
 
 ### 文件查看与操作
 
-创建文件：touch
+创建文件：`touch`
 
-创建文件夹：mkdir
+创建文件夹：`mkdir`
 
-查阅正在改变的日志文件: tail -f a.log
+查阅正在改变的日志文件: `tail -f a.log`
 
-顺序查阅文件: cat
+顺序查阅文件: `cat`
 
-倒序查阅文件: tac
+倒序查阅文件: `tac`
 
-复制: cp
+复制: `cp`
 
-剪切: mv
+剪切: `mv`
 
-软链接: ln -s
+软链接: `ln -s`
 
-删除: rm
+删除: `rm`
 
 #### tail
 
@@ -527,10 +527,106 @@ linux一切皆文件
 
 ### 文件权限
 
-修改目录下所有权限
-sudo chmod 777 /目录/ -R
-修改目录下所有用户组
-chown www:www www -R
+| 权限  | 对应字母 | 对应数字 |
+|-----|------|------|
+| 可读  | r    | 4    |
+| 可写  | w    | 2    |
+| 可执行 | x    | 1    |
+| 无     | -    | 0    |
+
+> UGO，指的是用户身份，每个字母代表不同的用户身份。
+
+* U（the user who owns it）文件的拥有者
+* G（other users in the file’s group）所属组
+* O（other users not in the file’s group）其他人
+* A（All users）所有用户。
+
+```shell
+ls -l
+drwxr-xr-x 2 root root 4096 Jan  7 11:23 a
+```
+
+1. `d`表示文件类型：
+    * `d` 目录
+    * `l` 软链接
+    * `b` 块设备
+    * `c` 字符设备
+    * `s` socket
+    * `p` 管道
+    * `-` 普通文件
+2. `rwx`表示 U 拥有者权限
+    * `r` 读
+    * `w` 写
+    * `x` 执行
+    * `-` 无
+3. `r-x`表示 G 组用户权限
+4. `r-x`表示 O 其他用户权限
+
+#### 默认权限
+
+默认权限靠umask的值来定义。
+
+```shell
+root@localhost:~# umask
+0022
+```
+
+0：文件特殊权限。
+
+022：文件默认权限
+
+文件默认不能建立为执行权限，必须手工赋予执行权限，所以文件的默认权限最大为666。
+
+666和umask的值换算字母再相减。
+
+1. 文件默认最大权限666，umask=022
+
+    -rw-rw-rw-   减去  -----w--w-   等于 -rw-r--r--   （644）
+
+2. 文件默认最大权限666，umask=033
+
+    -rw-rw-rw-   减去   -----wx-wx  等于 -rw-r--r--    （644）
+
+目录的默认权限：
+
+1. 目录默认权限最大是777。
+2. 目录默认权限换算成字符在相减。
+3. 建立目录之后的默认权限，是777减去umask的值。
+
+#### chmod 修改文件的普通权限
+
+```shell
+chmod u+x abc.txt
+chmod g-x abc.txt
+
+chmod o=r abc
+
+chmod u-x,g-x,o=rx abc.txt
+
+# 全部人加上x权限
+chmod a+x abc
+
+# 同时修改子文件权限
+chmod -R a+x abc
+
+# r读(4)+w写(2)=6 r读(4)+w写(2)=6 r读(4)=4 rw-rw-r--
+chmod 664 abc
+
+chmod -R 777 abc
+```
+
+#### chown 修改文件的所属用户和组
+
+```shell
+# 改为user用户
+chown user abc.txt
+
+# 改为user组
+chown :user abc.txt
+
+# 改为www用户和www组包括子文件
+chown -R www:www config 
+```
 
 ### 压缩解压
 
