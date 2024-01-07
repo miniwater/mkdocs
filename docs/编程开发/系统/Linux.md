@@ -617,6 +617,9 @@ chmod -R 777 abc
 
 #### chown 修改文件的所属用户和组
 
+查看组: `groups`
+查看id: `id`
+
 ```shell
 # 改为user用户
 chown user abc.txt
