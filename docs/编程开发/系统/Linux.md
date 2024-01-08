@@ -295,7 +295,7 @@ rm -rf /
 rm -rf *
 ```
 
-#### ls (快捷方式 链接)
+#### ln (快捷方式 链接)
 
 软链接（符号链接）：
 
@@ -314,16 +314,16 @@ rm -rf *
 硬链接可以通过 `ls -li` 查看 inode 是否相同
 
 ```shell
-# 硬链接文件
+# 硬链接文件 创建abc2.log
 ln abc.txt abc2.log
 
 # 硬链接文件夹
 # 不允许
 
-# 软链接文件
+# 软链接文件 创建abc2.log
 ln -s abc.txt abc2.log
 
-# 软链接文件夹
+# 软链接文件夹 创建config2
 ln -s config config2
 ```
 
