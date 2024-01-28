@@ -1,5 +1,9 @@
 # Redis2
 
+切换数据库 SELECT 1
+
+展示所有数据 KEYS '*'
+
 codis
 
 String

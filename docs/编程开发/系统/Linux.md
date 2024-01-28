@@ -52,7 +52,6 @@
 
 |     说明    |     命令    |
 | ----------- | ----------- |
-|创建目录 | mkdir |
 |进入目录     |cd folder|
 |返回上一级   |cd ..|
 |返回用户目录   |cd|
@@ -61,17 +60,26 @@
 |当前目录文件列表 | ls -l|
 |当前目录文件详细列表 | ls -sarln|
 |文件详细 | file package.xml|
-|复制 | cp|
-|剪切(重命名) | mv|
-|快捷键 | ln|
 
 ### 文件查看与操作
 
-|     说明    |     命令    |
-| ----------- | ----------- |
-|查阅正在改变的日志文件 | tail -f a.log |
-|顺序查阅文件 | cat |
-|倒序查阅文件 | tac |
+创建文件：`touch`
+
+创建文件夹：`mkdir`
+
+查阅正在改变的日志文件: `tail -f a.log`
+
+顺序查阅文件: `cat`
+
+倒序查阅文件: `tac`
+
+复制: `cp`
+
+剪切: `mv`
+
+软链接: `ln -s`
+
+删除: `rm`
 
 #### tail
 
@@ -107,7 +115,7 @@ tail --help
 man tail
 ```
 
-#### cat
+#### cat （查看、创建文件）
 
 ```shell
 # 创建空白文件，运行后才是键入内容
@@ -168,6 +176,155 @@ tac abc.txt
 
 cat --help
 man cat
+```
+
+#### mv （剪切、重命名）
+
+```shell
+# 移动文件(目录)到指定目录，如果后面没有斜杠会重命名
+mv abc.txt /opt/games/
+mv config /opt/games/
+
+#  重命名指定的文件(目录)
+mv abc.txt cba.txt
+mv config config2
+
+# 覆盖目标文件前询问用户是否确认
+mv -i abc.txt /opt/games/
+
+# 强制执行移动或重命名操作，当发生覆盖时是不进行确认提示，就不会询问是否覆盖，简而言之，强制覆盖。
+mv -f config /opt/games/
+
+# 当源文件比目标文件的创建时间更加新时，才执行覆盖操作
+mv -u config /opt/games/
+```
+
+#### cp （复制、重命名）
+
+```shell
+# 复制文件到指定位置，如果后面没有斜杠会重命名
+cp abc.txt /opt/games/
+
+# 复制目录到指定位置
+cp -r config /opt/games/
+
+# 强制覆盖文件
+cp -f abc.txt /opt/games/
+```
+
+#### mkdir（创建文件夹）
+
+```shell
+# 创建指定的名称的目录
+mkdir config
+
+# 递归创建多个目录
+mkdir -p config/config2/config3
+
+# 创建权限为777的目录(rwxrwxrwx)
+mkdir -m 777 config
+
+# 创建新目录都显示信息
+mkdir -v config
+mkdir -vp config/config2/config3
+```
+
+#### rm（删除）
+
+极速版：`rm -rf ./xx`
+
+```shell
+# 删除单个文件
+rm abc.txt
+
+# 删除多个文件
+rm abc.txt cba.txt aaa.txt
+
+# 删除文件前提示确认
+rm -i abc.txt
+
+# 删除空目录（哪怕里面有空文件夹都会删除失败）
+rm -d config/
+rmdir config/
+
+# 删除目录（递归处理）
+rm -r config/
+
+# 提示确认加递归删除目录
+rm -ri config/
+
+# 强制删除文件（对写保护目录无效，可组合成传奇命令 -rf）
+rm -f abc.txt
+
+#  删除三个以上文件或递归删除前提示确认一次
+# app1.log, app2.log, app3.log, app4.log......
+rm -I config/app*
+
+# rm加入正则表达式
+rm -f log{1..5}.txt   # 删除当前目录下从 log1 到 log5 的日志文件
+rm -f *.txt           # 删除当前目录下所有以“.txt”结尾的文件
+rm -f *.???           # 删除当前工作目录下所有扩展名为 3 个字符的文件
+
+# 删除以连字符 (-) 开头的文件
+rm -- -abc
+rm ./-abc
+```
+
+rm删除大量文件，可能得到 Argument list too long 的错误提示
+
+> Argument list too long: 参数列表过长，可以通过 `getconf ARG_MAX` 查看 Linux 系统的这个限制，可重新编译内核修改。
+
+传统较慢方法，30 万个文件，耗时为： 81m31.770s:
+
+```shell
+find ~/config/ -type f -exec rm {} \;
+find . -type f -exec rm -v {} \;
+```
+
+find 管道 + xargs （快很多）
+
+```shell
+# 删除当前目录
+find . -name "*" | xargs rm -rf
+```
+
+番外篇-删库跑路
+
+```shell
+rm -rf /
+rm -rf *
+```
+
+#### ln (快捷方式 链接)
+
+软链接（符号链接）：
+
+* 软链接，以路径的形式存在。类似于Windows操作系统中的快捷方式
+* 软链接可以 跨文件系统 ，硬链接不可以
+* 软链接可以对一个不存在的文件名进行链接
+* 软链接可以对目录进行链接
+
+硬链接:
+
+* 硬链接，以文件副本的形式存在。但不占用实际空间。
+* 不允许给目录创建硬链接
+* 硬链接只有在同一个文件系统中才能创建
+* 删除原始文件后，硬链接仍然存在
+
+硬链接可以通过 `ls -li` 查看 inode 是否相同
+
+```shell
+# 硬链接文件 创建abc2.log
+ln abc.txt abc2.log
+
+# 硬链接文件夹
+# 不允许
+
+# 软链接文件 创建abc2.log
+ln -s abc.txt abc2.log
+
+# 软链接文件夹 创建config2
+ln -s config config2
 ```
 
 ### 文件目录
@@ -370,10 +527,109 @@ linux一切皆文件
 
 ### 文件权限
 
-修改目录下所有权限
-sudo chmod 777 /目录/ -R
-修改目录下所有用户组
-chown www:www www -R
+| 权限  | 对应字母 | 对应数字 |
+|-----|------|------|
+| 可读  | r    | 4    |
+| 可写  | w    | 2    |
+| 可执行 | x    | 1    |
+| 无     | -    | 0    |
+
+> UGO，指的是用户身份，每个字母代表不同的用户身份。
+
+* U（the user who owns it）文件的拥有者
+* G（other users in the file’s group）所属组
+* O（other users not in the file’s group）其他人
+* A（All users）所有用户。
+
+```shell
+ls -l
+drwxr-xr-x 2 root root 4096 Jan  7 11:23 a
+```
+
+1. `d`表示文件类型：
+    * `d` 目录
+    * `l` 软链接
+    * `b` 块设备
+    * `c` 字符设备
+    * `s` socket
+    * `p` 管道
+    * `-` 普通文件
+2. `rwx`表示 U 拥有者权限
+    * `r` 读
+    * `w` 写
+    * `x` 执行
+    * `-` 无
+3. `r-x`表示 G 组用户权限
+4. `r-x`表示 O 其他用户权限
+
+#### 默认权限
+
+默认权限靠umask的值来定义。
+
+```shell
+root@localhost:~# umask
+0022
+```
+
+0：文件特殊权限。
+
+022：文件默认权限
+
+文件默认不能建立为执行权限，必须手工赋予执行权限，所以文件的默认权限最大为666。
+
+666和umask的值换算字母再相减。
+
+1. 文件默认最大权限666，umask=022
+
+    -rw-rw-rw-   减去  -----w--w-   等于 -rw-r--r--   （644）
+
+2. 文件默认最大权限666，umask=033
+
+    -rw-rw-rw-   减去   -----wx-wx  等于 -rw-r--r--    （644）
+
+目录的默认权限：
+
+1. 目录默认权限最大是777。
+2. 目录默认权限换算成字符在相减。
+3. 建立目录之后的默认权限，是777减去umask的值。
+
+#### chmod 修改文件的普通权限
+
+```shell
+chmod u+x abc.txt
+chmod g-x abc.txt
+
+chmod o=r abc
+
+chmod u-x,g-x,o=rx abc.txt
+
+# 全部人加上x权限
+chmod a+x abc
+
+# 同时修改子文件权限
+chmod -R a+x abc
+
+# r读(4)+w写(2)=6 r读(4)+w写(2)=6 r读(4)=4 rw-rw-r--
+chmod 664 abc
+
+chmod -R 777 abc
+```
+
+#### chown 修改文件的所属用户和组
+
+查看组: `groups`
+查看id: `id`
+
+```shell
+# 改为user用户
+chown user abc.txt
+
+# 改为user组
+chown :user abc.txt
+
+# 改为www用户和www组包括子文件
+chown -R www:www config 
+```
 
 ### 压缩解压
 
